@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>my blog — 日常の小さな贅沢</title>
+<meta name="description" content="日常のなかにある、小さな楽しみや贅沢を綴るエッセイブログ。">
+<style>
+  :root {
+    --bg: #eef1f6; --surface: #ffffff; --text: #252830;
+    --muted: #8c9ab8; --accent: #7b8ec8; --border: #d4daea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #181b24; --surface: #1e2130; --text: #dde2ee;
+      --muted: #6a7a9e; --accent: #8fa3d8; --border: #2e3348;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #eef1f6; --surface: #ffffff; --text: #252830;
+    --muted: #8c9ab8; --accent: #7b8ec8; --border: #d4daea;
+  }
+  :root[data-theme="dark"] {
+    --bg: #181b24; --surface: #1e2130; --text: #dde2ee;
+    --muted: #6a7a9e; --accent: #8fa3d8; --border: #2e3348;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    background: var(--bg); color: var(--text);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "游ゴシック", "Meiryo", system-ui, sans-serif;
+    font-size: 17px; line-height: 1.9; -webkit-font-smoothing: antialiased;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+
+  .hero { position: relative; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--border); }
+  #rain-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 4.5rem 1.5rem 4rem; }
+  .site-title {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "游明朝", "HGS明朝E", Georgia, serif;
+    font-size: clamp(2rem, 6vw, 3rem); font-weight: 600; letter-spacing: 0.06em;
+    color: var(--text);
+  }
+  .site-tagline { margin-top: 1rem; color: var(--muted); font-size: 0.95rem; letter-spacing: 0.04em; }
+
+  .posts { flex: 1; max-width: 680px; width: 100%; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .posts-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.8rem;
+  }
+  .post-card {
+    display: block; text-decoration: none; color: inherit;
+    padding: 1.6rem 0; border-top: 1px solid var(--border);
+    transition: padding-left 0.2s;
+  }
+  .post-card:last-child { border-bottom: 1px solid var(--border); }
+  .post-card:hover { padding-left: 0.5rem; }
+  .post-card:hover .card-title { color: var(--accent); }
+  .card-date { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; }
+  .card-title {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "游明朝", Georgia, serif;
+    font-size: 1.3rem; font-weight: 600; margin: 0.4rem 0 0.6rem;
+    letter-spacing: 0.03em; transition: color 0.2s; text-wrap: balance;
+  }
+  .card-excerpt { color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 1.5rem; text-align: center;
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em;
+  }
+
+  .theme-toggle {
+    position: fixed; top: 1rem; right: 1rem; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 50%; width: 2rem; height: 2rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--muted); transition: border-color 0.2s, color 0.2s; z-index: 10;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="toggle" aria-label="テーマ切り替え">☽</button>
+
+<header class="hero">
+  <canvas id="rain-canvas" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <h1 class="site-title">my blog</h1>
+    <p class="site-tagline">日常のなかの、小さな贅沢について。</p>
+  </div>
+</header>
+
+<main class="posts">
+  <div class="posts-label">記事一覧</div>
+
+  <a class="post-card" href="posts/rainy-days.html">
+    <div class="card-date">2026年7月3日 ・ エッセイ</div>
+    <h2 class="card-title">梅雨の日の小さな楽しみ</h2>
+    <p class="card-excerpt">雨が続くと、つい気分も沈みがちになる。けれど最近、雨の日にもちょっとした楽しみがあることに気づいた——。</p>
+  </a>
+</main>
+
+<footer>&copy; 2026 my blog</footer>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('toggle');
+  const stored = localStorage.getItem('theme');
+  if (stored) root.setAttribute('data-theme', stored);
+  if (stored === 'dark') btn.textContent = '☀';
+  btn.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    btn.textContent = next === 'dark' ? '☀' : '☽';
+  });
+
+  const canvas = document.getElementById('rain-canvas');
+  const ctx = canvas.getContext('2d');
+  let drops = [];
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; initDrops(); }
+  function initDrops() {
+    const count = Math.floor(canvas.width / 14);
+    drops = Array.from({ length: count }, () => ({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      len: 10 + Math.random() * 20, speed: 1.2 + Math.random() * 1.8,
+      opacity: 0.04 + Math.random() * 0.1,
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const isDark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const baseColor = isDark ? '90,120,200' : '100,130,200';
+    for (const d of drops) {
+      ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x - 1, d.y + d.len);
+      ctx.strokeStyle = `rgba(${baseColor},${d.opacity})`; ctx.lineWidth = 1; ctx.stroke();
+      d.y += d.speed;
+      if (d.y > canvas.height + d.len) { d.y = -d.len; d.x = Math.random() * canvas.width; }
+    }
+    requestAnimationFrame(draw);
+  }
+  new ResizeObserver(() => resize()).observe(canvas.parentElement);
+  resize(); draw();
+</script>
+</body>
+</html>
