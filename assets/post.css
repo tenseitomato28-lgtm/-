@@ -1,0 +1,83 @@
+/* =========================================================================
+   post.css — 若者向け記事の共通スタイル（新記事はこれを読み込むだけ）
+   ========================================================================= */
+:root {
+  --bg: #f6f5fb; --surface: #ffffff; --text: #1d1b2e;
+  --muted: #8a86a6; --accent: #6d4ef0; --accent-soft: #efeaff; --border: #e6e3f2;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14131c; --surface: #1c1a28; --text: #eceaf6;
+    --muted: #7b7794; --accent: #9d86ff; --accent-soft: #26213c; --border: #2b2840;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f6f5fb; --surface: #ffffff; --text: #1d1b2e;
+  --muted: #8a86a6; --accent: #6d4ef0; --accent-soft: #efeaff; --border: #e6e3f2;
+}
+:root[data-theme="dark"] {
+  --bg: #14131c; --surface: #1c1a28; --text: #eceaf6;
+  --muted: #7b7794; --accent: #9d86ff; --accent-soft: #26213c; --border: #2b2840;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  background: var(--bg); color: var(--text);
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "游ゴシック", "Meiryo", system-ui, sans-serif;
+  font-size: 17px; line-height: 1.9; -webkit-font-smoothing: antialiased;
+}
+body { min-height: 100vh; display: flex; flex-direction: column; }
+
+.masthead {
+  position: relative; overflow: hidden; border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(120% 120% at 15% -10%, var(--accent-soft) 0%, transparent 55%),
+    var(--surface);
+}
+.masthead-inner { max-width: 680px; margin: 0 auto; padding: 3.5rem 1.5rem 3rem; }
+.site-name {
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 2rem; display: inline-block;
+  text-decoration: none; transition: color 0.2s;
+}
+.site-name:hover { color: var(--accent); }
+.post-title {
+  font-size: clamp(1.7rem, 5vw, 2.4rem); font-weight: 800; line-height: 1.35;
+  letter-spacing: 0.01em; color: var(--text); text-wrap: balance;
+}
+.post-meta {
+  margin-top: 1.3rem; font-size: 0.78rem; color: var(--muted);
+  letter-spacing: 0.05em; display: flex; align-items: center; gap: 1rem;
+}
+.post-meta .tag {
+  background: var(--accent-soft); color: var(--accent);
+  padding: 0.2em 0.7em; border-radius: 999px; font-size: 0.72rem; letter-spacing: 0.06em; font-weight: 600;
+}
+
+.article-wrap { flex: 1; max-width: 680px; width: 100%; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+.post-body p { margin-bottom: 1.6em; color: var(--text); max-width: 62ch; }
+.post-body p:last-child { margin-bottom: 0; }
+.post-body h2 {
+  font-size: 1.2rem; font-weight: 800; margin: 2.4em 0 0.9em;
+  letter-spacing: 0.01em; color: var(--text);
+}
+.post-body strong { color: var(--accent); font-weight: 700; }
+
+.back-link {
+  display: inline-block; margin-top: 3rem; font-size: 0.82rem;
+  color: var(--accent); text-decoration: none; letter-spacing: 0.03em; font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+
+footer {
+  border-top: 1px solid var(--border); padding: 1.5rem; text-align: center;
+  font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em;
+}
+.theme-toggle {
+  position: fixed; top: 1rem; right: 1rem; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 50%; width: 2rem; height: 2rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; color: var(--muted); transition: border-color 0.2s, color 0.2s; z-index: 10;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
