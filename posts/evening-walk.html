@@ -3,44 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>梅雨の日の小さな楽しみ — my blog</title>
-<meta name="description" content="雨の季節に見つけた、日常の小さな贅沢についてのエッセイ。">
-<link rel="canonical" href="https://tenseitomato28-lgtm.github.io/-/posts/rainy-days.html">
+<title>夕方の散歩という贅沢 — my blog</title>
+<meta name="description" content="日が傾く頃に、あてもなく歩く。夏の夕暮れに見つけた小さな贅沢についてのエッセイ。">
+<link rel="canonical" href="https://tenseitomato28-lgtm.github.io/-/posts/evening-walk.html">
 <!-- OGP / SNSシェア -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="my blog">
-<meta property="og:title" content="梅雨の日の小さな楽しみ">
-<meta property="og:description" content="雨の季節に見つけた、日常の小さな贅沢についてのエッセイ。">
-<meta property="og:url" content="https://tenseitomato28-lgtm.github.io/-/posts/rainy-days.html">
+<meta property="og:title" content="夕方の散歩という贅沢">
+<meta property="og:description" content="日が傾く頃に、あてもなく歩く。夏の夕暮れに見つけた小さな贅沢についてのエッセイ。">
+<meta property="og:url" content="https://tenseitomato28-lgtm.github.io/-/posts/evening-walk.html">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-07-03">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="梅雨の日の小さな楽しみ">
-<meta name="twitter:description" content="雨の季節に見つけた、日常の小さな贅沢についてのエッセイ。">
+<meta name="twitter:title" content="夕方の散歩という贅沢">
+<meta name="twitter:description" content="日が傾く頃に、あてもなく歩く。夏の夕暮れに見つけた小さな贅沢についてのエッセイ。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%94%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/-/assets/monetize.css">
 <style>
   :root {
-    --bg:       #eef1f6;
+    --bg:       #f4f1ea;
     --surface:  #ffffff;
-    --text:     #252830;
-    --muted:    #8c9ab8;
-    --accent:   #7b8ec8;
-    --border:   #d4daea;
+    --text:     #2d2a26;
+    --muted:    #a89b86;
+    --accent:   #c88a4e;
+    --border:   #e6ded0;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #181b24; --surface: #1e2130; --text: #dde2ee;
-      --muted: #6a7a9e; --accent: #8fa3d8; --border: #2e3348;
+      --bg: #201d1a; --surface: #29241f; --text: #ece5da;
+      --muted: #8a7d6a; --accent: #d99f63; --border: #3a332b;
     }
   }
   :root[data-theme="light"] {
-    --bg: #eef1f6; --surface: #ffffff; --text: #252830;
-    --muted: #8c9ab8; --accent: #7b8ec8; --border: #d4daea;
+    --bg: #f4f1ea; --surface: #ffffff; --text: #2d2a26;
+    --muted: #a89b86; --accent: #c88a4e; --border: #e6ded0;
   }
   :root[data-theme="dark"] {
-    --bg: #181b24; --surface: #1e2130; --text: #dde2ee;
-    --muted: #6a7a9e; --accent: #8fa3d8; --border: #2e3348;
+    --bg: #201d1a; --surface: #29241f; --text: #ece5da;
+    --muted: #8a7d6a; --accent: #d99f63; --border: #3a332b;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html {
@@ -51,7 +51,7 @@
   body { min-height: 100vh; display: flex; flex-direction: column; }
 
   .masthead { position: relative; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--border); }
-  #rain-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  #sky-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   .masthead-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 3.5rem 1.5rem 3rem; }
 
   .site-name {
@@ -71,7 +71,7 @@
     letter-spacing: 0.06em; display: flex; align-items: center; gap: 1rem;
   }
   .post-meta .tag {
-    background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent);
     padding: 0.18em 0.65em; border-radius: 2px; font-size: 0.72rem; letter-spacing: 0.1em;
   }
 
@@ -111,10 +111,10 @@
 <button class="theme-toggle" id="toggle" aria-label="テーマ切り替え">☽</button>
 
 <header class="masthead">
-  <canvas id="rain-canvas" aria-hidden="true"></canvas>
+  <canvas id="sky-canvas" aria-hidden="true"></canvas>
   <div class="masthead-inner">
     <a href="../index.html" class="site-name">← my blog</a>
-    <h1 class="post-title">梅雨の日の小さな楽しみ</h1>
+    <h1 class="post-title">夕方の散歩という贅沢</h1>
     <div class="post-meta">
       <span>2026年7月3日</span>
       <span class="tag">エッセイ</span>
@@ -125,11 +125,11 @@
 <main class="article-wrap">
   <div id="ad-top"></div>
   <article class="post-body">
-    <p>雨が続くと、つい気分も沈みがちになる。傘を差して歩くのは面倒だし、洗濯物も乾かない。けれど最近、雨の日にもちょっとした楽しみがあることに気づいた。</p>
-    <p>ひとつは、窓際で雨音を聞きながら飲む温かいお茶の時間だ。普段は何かをしながら飲んでしまうコーヒーやお茶も、雨の日は不思議と「ただ飲むこと」に集中できる。雨粒が窓を伝う音、遠くで聞こえる車の音、そういったものが少しだけ穏やかな時間を作ってくれる。</p>
-    <p>もうひとつは、傘を選ぶ楽しさだ。何本か持っている傘の中から、その日の気分で色や柄を選ぶ。子どもの頃は嫌だった「傘を差す」という行為が、大人になった今は小さな選択の自由として楽しめるようになった。</p>
-    <p>梅雨はいつか明ける。だからこそ、今のこの時期にしかない景色や音、感覚を大事にしたいと思う。雨の匂い、紫陽花の色、湿った空気——これらは晴れの日には味わえないものだ。</p>
-    <p>不便だと思っていたことの中に、実は小さな贅沢が隠れている。そんなことを、この梅雨の季節は教えてくれる気がする。</p>
+    <p>夕方、日が傾きはじめる頃に家を出て、あてもなく近所を歩く。ここ最近、それがささやかな習慣になっている。</p>
+    <p>きっかけは、昼間の暑さだった。日中はとても外を歩く気になれないけれど、夕方になると風に少しだけ涼しさが混じる。その、空気が入れ替わる瞬間の心地よさに気づいてから、日暮れを待つのが楽しみになった。</p>
+    <p>歩いていると、昼間は気づかないものがよく見える。塀のすきまから伸びた見知らぬ花、どこかの家の夕食の匂い、下校する子どもたちの声。目的地を決めずに歩くと、こういう小さなものたちが自然と目に入ってくる。急いでいるときには決して見えないものだ。</p>
+    <p>空の色が刻々と変わっていくのも、この時間ならではだ。オレンジから紫へ、そして藍色へ。同じ道を歩いていても、昨日と今日で空はまるで違う。二度と同じ夕暮れはないのだと思うと、なんだか得をした気分になる。</p>
+    <p>用事もなく、ただ歩くだけの時間。効率だけを考えれば無駄なのかもしれない。けれど、その「無駄」の中にこそ、一日をやわらかく閉じてくれる何かがある気がする。</p>
     <a href="../index.html" class="back-link">← 記事一覧にもどる</a>
   </article>
   <div id="monetize"></div>
@@ -152,29 +152,27 @@
     btn.textContent = next === 'dark' ? '☀' : '☽';
   });
 
-  const canvas = document.getElementById('rain-canvas');
+  // 夕暮れの空：ゆっくり色が移ろうグラデーション
+  const canvas = document.getElementById('sky-canvas');
   const ctx = canvas.getContext('2d');
-  let drops = [];
-  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; initDrops(); }
-  function initDrops() {
-    const count = Math.floor(canvas.width / 14);
-    drops = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-      len: 10 + Math.random() * 20, speed: 1.2 + Math.random() * 1.8,
-      opacity: 0.04 + Math.random() * 0.1,
-    }));
-  }
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  let t = 0;
   function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     const isDark = root.getAttribute('data-theme') === 'dark' ||
       (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-    const baseColor = isDark ? '90,120,200' : '100,130,200';
-    for (const d of drops) {
-      ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x - 1, d.y + d.len);
-      ctx.strokeStyle = `rgba(${baseColor},${d.opacity})`; ctx.lineWidth = 1; ctx.stroke();
-      d.y += d.speed;
-      if (d.y > canvas.height + d.len) { d.y = -d.len; d.x = Math.random() * canvas.width; }
+    const phase = (Math.sin(t) + 1) / 2; // 0..1
+    const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    if (isDark) {
+      grad.addColorStop(0, `rgba(60,45,70,${0.10 + phase * 0.05})`);
+      grad.addColorStop(1, `rgba(217,159,99,${0.05 + phase * 0.06})`);
+    } else {
+      grad.addColorStop(0, `rgba(200,138,78,${0.06 + phase * 0.06})`);
+      grad.addColorStop(1, `rgba(120,90,140,${0.05 + phase * 0.05})`);
     }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    t += 0.004;
     requestAnimationFrame(draw);
   }
   new ResizeObserver(() => resize()).observe(canvas.parentElement);
@@ -182,10 +180,10 @@
 </script>
 <script>
   window.PAGE = {
-    title: "梅雨の日の小さな楽しみ",
+    title: "夕方の散歩という贅沢",
     affiliate: [
-      { name: "お気に入りの茶葉", desc: "雨音を聞きながらの一杯に。", url: "https://www.amazon.co.jp/s?k=紅茶+茶葉" },
-      { name: "上質な折りたたみ傘", desc: "その日の気分で選びたくなる一本。", url: "https://www.amazon.co.jp/s?k=折りたたみ傘" }
+      { name: "歩きやすいスニーカー", desc: "夕暮れの散歩を軽やかに。", url: "https://www.amazon.co.jp/s?k=スニーカー+ウォーキング" },
+      { name: "コンパクトな水筒", desc: "涼しくなった夕方の一歩に。", url: "https://www.amazon.co.jp/s?k=水筒+軽量" }
     ]
   };
 </script>
