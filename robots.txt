@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tenseitomato28-lgtm.github.io/-/sitemap.xml
