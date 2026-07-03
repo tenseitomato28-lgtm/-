@@ -16,7 +16,7 @@ window.SITE = {
      note / Ko-fi / Buy Me a Coffee などの自分のページURLを貼るだけ。
      例: "https://note.com/あなたのID"  /  "https://ko-fi.com/あなたのID"     */
   support: {
-    url:   "",                    // ← ここにサポートページのURL
+    url:   "https://note.com/essay28",   // ← ここにサポートページのURL
     label: "☕ この記事を応援する",
     note:  "いただいた応援は、次のエッセイを書く励みになります。",
   },
