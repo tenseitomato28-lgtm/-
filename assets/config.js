@@ -24,7 +24,7 @@ window.SITE = {
   /* ---- ② Amazon アソシエイト等のアフィリエイト ----
      承認後に発行される「トラッキングID」を貼ると、各記事の商品リンクに
      自動で付与されます（記事ごとの商品は各HTMLの PAGE 設定で指定）。      */
-  amazonTag: "",                  // ← 例: "myblog-22"
+  amazonTag: "tenseitomato2-22",  // ← 例: "myblog-22"
 
   /* ---- ③ Google AdSense（ディスプレイ広告） ----
      審査通過後に発行される「pub-xxxxxxxxxxxxxxxx」を貼ると広告が表示されます。 */
