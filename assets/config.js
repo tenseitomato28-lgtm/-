@@ -10,7 +10,7 @@ window.SITE = {
 
   /* ---- サイト情報 ---- */
   baseUrl: "https://tenseitomato28-lgtm.github.io/-",
-  author:  "my blog",
+  author:  "無理なく",
 
   /* ---- ① 投げ銭・サポート（一番かんたん・元手ゼロ） ----
      note / Ko-fi / Buy Me a Coffee などの自分のページURLを貼るだけ。
