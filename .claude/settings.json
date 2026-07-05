@@ -11,7 +11,7 @@
           },
           {
             "type": "command",
-            "command": "f=\"${CLAUDE_PROJECT_DIR:-/home/user/-}/.claude/last-review\"; r=$(cat \"$f\" 2>/dev/null || echo 0); now=$(date +%s); if [ $((now - r)) -gt 604800 ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"[週次見直し] 前回の見直しから7日以上経過。CLAUDE.mdの『週次見直しでやること』を実行し、完了後 .claude/last-review に date +%%s の値を書いてコミット・プッシュしてください。\"},\"systemMessage\":\"🔍 週次見直しの時期です — Claudeが点検します\"}'; fi",
+            "command": "f=\"${CLAUDE_PROJECT_DIR:-/home/user/-}/.claude/last-review\"; r=$(cat \"$f\" 2>/dev/null || echo 0); now=$(date +%s); dow=$(TZ=Asia/Tokyo date +%u); today9=$(date -d \"TZ=\\\"Asia/Tokyo\\\" $(TZ=Asia/Tokyo date +%F) 09:00\" +%s); mon9=$(( today9 - (dow - 1) * 86400 )); if [ \"$now\" -lt \"$mon9\" ]; then mon9=$(( mon9 - 604800 )); fi; if [ \"$r\" -lt \"$mon9\" ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"[週次点検・月曜9時] 今週の月曜9時(JST)以降まだ点検していません。CLAUDE.mdの『週次見直しでやること』を全項目実行してください。特に『収入を伸ばす一手の提案』を必ず含めること。完了後 .claude/last-review に date +%%s の値を書いてコミット・プッシュしてください。\"},\"systemMessage\":\"🔍 週次点検(月曜9時)の時間です — Claudeが実行します\"}'; fi",
             "timeout": 15,
             "statusMessage": "週次見直しの時期を確認中..."
           }
