@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "c=$(ls \"${CLAUDE_PROJECT_DIR:-/home/user/-}\"/queue/*.json 2>/dev/null | wc -l); if [ \"$c\" -lt 5 ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"[記事ストック警告] queue/ の記事ストックが残り%s本です(5本未満)。ブログ「無理なく」のトーン(共感重視・5段落構成)で新しいエッセイをJSON形式でqueue/に追加し、常時5本以上にしてから、コミットしてorigin claude/blog-project-setup-obd06sにプッシュしてください。形式は既存のqueue/*.jsonを参照。\"},\"systemMessage\":\"📝 記事ストック残り%s本 — Claudeが自動補充します\"}' \"$c\" \"$c\"; fi",
+            "timeout": 15,
+            "statusMessage": "記事ストックを確認中..."
+          }
+        ]
+      }
+    ]
+  }
+}
