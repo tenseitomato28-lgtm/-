@@ -8,6 +8,12 @@
             "command": "c=$(ls \"${CLAUDE_PROJECT_DIR:-/home/user/-}\"/queue/*.json 2>/dev/null | wc -l); if [ \"$c\" -lt 5 ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"[記事ストック警告] queue/ の記事ストックが残り%s本です(5本未満)。ブログ「無理なく」のトーン(共感重視・5段落構成)で新しいエッセイをJSON形式でqueue/に追加し、常時5本以上にしてから、コミットしてorigin claude/blog-project-setup-obd06sにプッシュしてください。形式は既存のqueue/*.jsonを参照。\"},\"systemMessage\":\"📝 記事ストック残り%s本 — Claudeが自動補充します\"}' \"$c\" \"$c\"; fi",
             "timeout": 15,
             "statusMessage": "記事ストックを確認中..."
+          },
+          {
+            "type": "command",
+            "command": "f=\"${CLAUDE_PROJECT_DIR:-/home/user/-}/.claude/last-review\"; r=$(cat \"$f\" 2>/dev/null || echo 0); now=$(date +%s); if [ $((now - r)) -gt 604800 ]; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"[週次見直し] 前回の見直しから7日以上経過。CLAUDE.mdの『週次見直しでやること』を実行し、完了後 .claude/last-review に date +%%s の値を書いてコミット・プッシュしてください。\"},\"systemMessage\":\"🔍 週次見直しの時期です — Claudeが点検します\"}'; fi",
+            "timeout": 15,
+            "statusMessage": "週次見直しの時期を確認中..."
           }
         ]
       }
