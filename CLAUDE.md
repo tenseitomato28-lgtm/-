@@ -43,6 +43,21 @@
 - Kindle本『無理なく』¥399: 出版済み（原稿: `kindle/murinaku.epub`、表紙: `kindle/cover.jpg`）
 - AdSense: 未申請（アクセスが育ってから）
 
+## ファイル構成
+```
+index.html / feed.xml / sitemap.xml / robots.txt / .nojekyll / googlefb*.html
+                  ← 公開サイトの根幹。ルートから動かさない（URL・検証が壊れる）
+posts/            ← 公開済み記事HTML（URL固定。リネーム・削除禁止）
+queue/            ← 公開待ちストック（毎日18:02に1本ずつ消費される）
+assets/           ← 共通CSS/JS・収益設定(config.js)・note用ヘッダー画像
+scripts/          ← publish-next.js（自動公開スクリプト）
+kindle/           ← Kindle本（原稿EPUB・表紙）
+docs/             ← ガイド類（MONETIZE.md, KDP-GUIDE.md）と過去の下書き(archive/)
+note-drafts.md    ← note転載用テキスト（ユーザーが毎日使うのでルート置き）
+x-posts.md        ← X宣伝文（同上）
+.github/ .claude/ ← 自動化設定（ワークフロー・フック）
+```
+
 ## 記事の追加方法（手動で1本すぐ出す場合）
 `queue/NNN-slug.json` を作成 → `node scripts/publish-next.js` → コミット・プッシュ。
 note用の下書きは `note-drafts.md`、X宣伝文は `x-posts.md` に追記する。
