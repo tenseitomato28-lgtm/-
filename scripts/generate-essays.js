@@ -51,7 +51,7 @@ function buildPrompt() {
 - 読者: 日本の20〜30代。仕事や暮らしに少し疲れている人
 - 静か・内省的・寄り添い型。「がんばりすぎなくていい」が核。説教しない
 - 構成: 情景から入る書き出し → 五感の具体 → 一文の発見 → 最後は必ずやわらかく肯定して終える
-- 本文は5〜6段落。各段落は日本語で100〜200字程度
+- 本文は9〜12段落、合計2500〜3500字。内容を詰め込むのではなく、無駄・脱線・どうでもいい具体でゆったりふくらませる（効率のいい文章を書かない）
 - いまは${month}月。季節感が合う題材だと望ましい（必須ではない)
 
 ## 文体の掟（最重要）
@@ -67,6 +67,7 @@ function buildPrompt() {
 - 話はポンと飛んでよい。脱線を味として残す
 - 固有名詞・数字・時刻で具体に（「夜遅く」ではなく「23時46分」、「飲み物」ではなく「午後の紅茶」）
 - タイトルは説明ではなく「事件性・意外性のある具体的な一文」にする
+- ユーモアは「狙って作ったオチ」ではなく「偶然のしょうもなさ」。何も起こらない出来事・意味のないディテールをオチにせずそのまま置く。設計されたボケ比喩は1記事1個まで
 
 ## 既存タイトル（これらと重複・類似しないこと）
 ${titles.map(t => "- " + t).join("\n")}
@@ -82,7 +83,7 @@ ${titles.map(t => "- " + t).join("\n")}
   "affiliate": [
     { "name": "本文の内容に自然に関連する商品名", "desc": "ひとこと説明", "url": "https://www.amazon.co.jp/s?k=検索キーワード" }
   ],
-  "body": ["段落1", "段落2", "段落3", "段落4", "段落5"]
+  "body": ["段落1", "段落2", "…", "段落9〜12"]
 }`;
 }
 
@@ -96,7 +97,7 @@ async function callClaude(prompt) {
     },
     body: JSON.stringify({
       model: "claude-sonnet-5",
-      max_tokens: 3000,
+      max_tokens: 6000,
       messages: [{ role: "user", content: prompt }],
     }),
   });
@@ -112,7 +113,7 @@ function validate(p) {
   if (titles.includes(p.title)) return "duplicate title";
   if (!["こころ", "暮らし", "ライフ", "カルチャー", "お金"].includes(p.tag)) return "bad tag";
   if (!p.desc || !p.excerpt) return "missing desc/excerpt";
-  if (!Array.isArray(p.body) || p.body.length < 4 || p.body.length > 7) return "bad body";
+  if (!Array.isArray(p.body) || p.body.length < 7 || p.body.length > 14) return "bad body";
   if (p.body.some(t => typeof t !== "string" || t.length < 40)) return "body paragraph too short";
   if (!Array.isArray(p.affiliate)) p.affiliate = [];
   return null;
