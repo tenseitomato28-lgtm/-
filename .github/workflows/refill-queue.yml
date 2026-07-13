@@ -1,0 +1,40 @@
+name: refill-queue
+
+on:
+  schedule:
+    # 火・金 07:03 JST = 月・木 22:03 UTC
+    - cron: "3 22 * * 1,4"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Generate one essay even if queue is full (test)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  refill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate essays if queue below 5
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: node scripts/generate-essays.js
+
+      - name: Commit and push
+        run: |
+          git config user.name "murinaku-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add queue/
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "Auto-refill essay queue"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

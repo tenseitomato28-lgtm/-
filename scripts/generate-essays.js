@@ -1,0 +1,133 @@
+/* =========================================================================
+   generate-essays.js — queue/ が5本未満のとき、Claude APIでエッセイを
+   自動生成して補充する。GitHub Actions (refill-queue.yml) から実行される。
+   環境変数: ANTHROPIC_API_KEY (必須) / FORCE=1 (満杯でも1本生成・テスト用)
+   ========================================================================= */
+const fs = require("fs");
+const path = require("path");
+const ROOT = path.join(__dirname, "..");
+const QDIR = path.join(ROOT, "queue");
+const TARGET = 5;
+
+const KEY = process.env.ANTHROPIC_API_KEY;
+const FORCE = !!process.env.FORCE;
+
+const queueFiles = fs.readdirSync(QDIR).filter(f => f.endsWith(".json"));
+let need = TARGET - queueFiles.length;
+if (FORCE && need < 1) need = 1;
+if (need < 1) {
+  console.log(`queue has ${queueFiles.length} items — no refill needed`);
+  process.exit(0);
+}
+if (!KEY) {
+  console.error("ANTHROPIC_API_KEY is not set");
+  process.exit(1);
+}
+
+/* 既存タイトル・slug（重複防止） */
+const titles = [];
+const slugs = new Set();
+for (const f of fs.readdirSync(path.join(ROOT, "posts")).filter(f => f.endsWith(".html"))) {
+  const m = fs.readFileSync(path.join(ROOT, "posts", f), "utf8").match(/<title>([^<]+?)\s*—/);
+  if (m) titles.push(m[1].trim());
+  slugs.add(f.replace(/\.html$/, ""));
+}
+for (const f of queueFiles) {
+  try {
+    const p = JSON.parse(fs.readFileSync(path.join(QDIR, f), "utf8"));
+    titles.push(p.title);
+    slugs.add(p.slug);
+  } catch {}
+}
+
+const now = new Date(Date.now() + 9 * 3600 * 1000);
+const month = now.getUTCMonth() + 1;
+const datePrefix = now.toISOString().slice(0, 10).replace(/-/g, "");
+
+function buildPrompt() {
+  return `あなたはエッセイブログ「無理なく」の筆者です。新しいエッセイを1本書いてください。
+
+## ブログのトーン（厳守）
+- 読者: 日本の20〜30代。仕事や暮らしに少し疲れている人
+- 静か・内省的・寄り添い型。「がんばりすぎなくていい」が核。説教しない
+- 構成: 情景から入る書き出し → 五感の具体 → 一文の発見 → 最後は必ずやわらかく肯定して終える
+- 本文は5〜6段落。各段落は日本語で100〜200字程度
+- いまは${month}月。季節感が合う題材だと望ましい（必須ではない）
+
+## 既存タイトル（これらと重複・類似しないこと）
+${titles.map(t => "- " + t).join("\n")}
+
+## 出力形式
+以下のJSONだけを出力すること。コードブロック記号や説明文は一切付けない。
+{
+  "slug": "英小文字とハイフンのみの短いスラッグ",
+  "title": "エッセイのタイトル（30字以内）",
+  "tag": "こころ/暮らし/ライフ/カルチャー/お金 のいずれか",
+  "desc": "メタ説明文（60字以内）",
+  "excerpt": "一覧に出る抜粋（60字以内・本文冒頭の要約）",
+  "affiliate": [
+    { "name": "本文の内容に自然に関連する商品名", "desc": "ひとこと説明", "url": "https://www.amazon.co.jp/s?k=検索キーワード" }
+  ],
+  "body": ["段落1", "段落2", "段落3", "段落4", "段落5"]
+}`;
+}
+
+async function callClaude(prompt) {
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "x-api-key": KEY,
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "claude-sonnet-5",
+      max_tokens: 3000,
+      messages: [{ role: "user", content: prompt }],
+    }),
+  });
+  if (!res.ok) throw new Error(`API ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  const data = await res.json();
+  return data.content.map(b => b.text || "").join("");
+}
+
+function validate(p) {
+  if (!p.slug || !/^[a-z0-9-]{3,40}$/.test(p.slug)) return "bad slug";
+  if (slugs.has(p.slug)) return "duplicate slug";
+  if (!p.title || p.title.length > 40) return "bad title";
+  if (titles.includes(p.title)) return "duplicate title";
+  if (!["こころ", "暮らし", "ライフ", "カルチャー", "お金"].includes(p.tag)) return "bad tag";
+  if (!p.desc || !p.excerpt) return "missing desc/excerpt";
+  if (!Array.isArray(p.body) || p.body.length < 4 || p.body.length > 7) return "bad body";
+  if (p.body.some(t => typeof t !== "string" || t.length < 40)) return "body paragraph too short";
+  if (!Array.isArray(p.affiliate)) p.affiliate = [];
+  return null;
+}
+
+(async () => {
+  let made = 0;
+  for (let i = 0; i < need; i++) {
+    let ok = false;
+    for (let attempt = 1; attempt <= 2 && !ok; attempt++) {
+      try {
+        const raw = await callClaude(buildPrompt());
+        const m = raw.match(/\{[\s\S]*\}/);
+        if (!m) throw new Error("no JSON in response");
+        const p = JSON.parse(m[0]);
+        const err = validate(p);
+        if (err) throw new Error("validation: " + err);
+        const fname = `${datePrefix}-${p.slug}.json`;
+        fs.writeFileSync(path.join(QDIR, fname), JSON.stringify(p, null, 2) + "\n");
+        titles.push(p.title);
+        slugs.add(p.slug);
+        made++;
+        ok = true;
+        console.log(`generated: ${p.title} -> queue/${fname}`);
+      } catch (e) {
+        console.error(`attempt ${attempt} failed: ${e.message}`);
+      }
+    }
+  }
+  console.log(`done: ${made}/${need} generated`);
+  if (made === 0 && need > 0) process.exit(1);
+})();
