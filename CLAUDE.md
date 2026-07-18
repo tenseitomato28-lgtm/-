@@ -76,6 +76,12 @@ x-posts.md        ← X宣伝文（同上）
 .github/ .claude/ ← 自動化設定（ワークフロー・フック）
 ```
 
+## 運用メモ（セッションをまたぐ引き継ぎ・2026/7/18時点）
+- **日次ルーチン**: ユーザーが「今日の分」と言ったら、note-drafts.md の投稿済み記録を見て未投稿から曜日・時間帯に合う1本を選び、本文をposts/のHTMLから抽出して、note用フォーマット（本文＋区切り線＋ブログ誘導＋ハッシュタグ）で貼る。投稿報告を受けたらチェックを付けてコミット
+- **投稿記録の根拠**: ユーザーの「投稿した」報告か、noteのスクショのみ。「テキストを渡した」だけで投稿済みにしない（過去に齟齬が出た）。月1回スクショで照合する
+- **既存記事の新文体への改稿**: 完了済みは nemurenai-natsu / hitori-gohan / soumen / heya-no-akari / kuso-atsui / nanimo-shinai-hi / sns-tsukare / nakeru-eiga の8本（タイトルも事件性型に変更済み）。残りは週次点検で3〜4本ずつ、noteに未投稿のものから優先。改稿時はタイトル・desc・excerpt・本文をpost HTML/index.html/feed.xmlの3か所で整合させる（URLとslugは不変）
+- **API自動生成**: refill-queue.yml が火・金 07:03 JST に稼働確認済み（7/17に3本自動生成成功）。品質は週次点検でチェック
+
 ## 記事の追加方法（手動で1本すぐ出す場合）
 `queue/NNN-slug.json` を作成 → `node scripts/publish-next.js` → コミット・プッシュ。
 note用の下書きは `note-drafts.md`、X宣伝文は `x-posts.md` に追記する。
