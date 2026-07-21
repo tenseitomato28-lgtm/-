@@ -1,7 +1,7 @@
 # 無理なく — ブログ運用マニュアル
 
 エッセイブログ「無理なく」のリポジトリ。収益化済み・自動運用中。
-公開URL: https://tenseitomato28-lgtm.github.io/-/ (GitHub Pages, ブランチ claude/blog-project-setup-obd06s 直下)
+公開URL: https://murinaku-blog.pages.dev/ (GitHub Pages, ブランチ claude/blog-project-setup-obd06s 直下)
 
 ## プロジェクトの目的
 若者向けの共感エッセイで読者を集め、収益化する。

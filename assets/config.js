@@ -9,7 +9,7 @@
 window.SITE = {
 
   /* ---- サイト情報 ---- */
-  baseUrl: "https://tenseitomato28-lgtm.github.io/-",
+  baseUrl: "https://murinaku-blog.pages.dev",
   author:  "無理なく",
 
   /* ---- ① 投げ銭・サポート（一番かんたん・元手ゼロ） ----

@@ -6,7 +6,7 @@
 const fs = require("fs");
 const path = require("path");
 const ROOT = path.join(__dirname, "..");
-const BASE = "https://tenseitomato28-lgtm.github.io/-";
+const BASE = "https://murinaku-blog.pages.dev";
 
 const queueDir = path.join(ROOT, "queue");
 const files = fs.existsSync(queueDir)

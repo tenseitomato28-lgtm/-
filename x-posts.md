@@ -17,7 +17,7 @@
 その憂うつは、怠けでも弱さでもなくて、ちゃんと生きている証拠だと思う。
 
 エッセイ書きました↓
-https://tenseitomato28-lgtm.github.io/-/posts/nichiyou-no-yoru.html
+https://murinaku-blog.pages.dev/posts/nichiyou-no-yoru.html
 
 #日曜日の夜 #エッセイ
 ```
@@ -29,7 +29,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/nichiyou-no-yoru.html
 そんな夜のためのエッセイを書きました。
 植物の根は、土の中で伸びている間、外からは見えないんだよね。
 
-https://tenseitomato28-lgtm.github.io/-/posts/mukuwarenai-yoru.html
+https://murinaku-blog.pages.dev/posts/mukuwarenai-yoru.html
 
 #エッセイ
 ```
@@ -41,7 +41,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/mukuwarenai-yoru.html
 
 不便の中に隠れている小さな贅沢の話。
 
-https://tenseitomato28-lgtm.github.io/-/posts/rainy-days.html
+https://murinaku-blog.pages.dev/posts/rainy-days.html
 
 #雨の日 #エッセイ
 ```
@@ -56,7 +56,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/rainy-days.html
 
 それはあなたが冷たいからじゃなくて、真剣に相手と向き合っている証拠。
 
-https://tenseitomato28-lgtm.github.io/-/posts/tomodachi-tsukare.html
+https://murinaku-blog.pages.dev/posts/tomodachi-tsukare.html
 
 #HSP #エッセイ
 ```
@@ -67,7 +67,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/tomodachi-tsukare.html
 
 変われないのは意志が弱いからじゃなくて、ハードルが高すぎるだけ、という話を書きました。
 
-https://tenseitomato28-lgtm.github.io/-/posts/kawaritai.html
+https://murinaku-blog.pages.dev/posts/kawaritai.html
 
 #エッセイ
 ```
@@ -79,7 +79,7 @@ SNSで見ているのは、他人の総集編。
 
 そりゃ勝てないよね、という話。
 
-https://tenseitomato28-lgtm.github.io/-/posts/hikaku.html
+https://murinaku-blog.pages.dev/posts/hikaku.html
 
 #SNS疲れ #エッセイ
 ```
@@ -91,7 +91,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/hikaku.html
 その「ちゃんと」の基準、誰が決めたんだろう。
 今日を生き延びただけで、ほんとは百点だと思う。
 
-https://tenseitomato28-lgtm.github.io/-/posts/chanto-shinakya.html
+https://murinaku-blog.pages.dev/posts/chanto-shinakya.html
 
 #エッセイ
 ```
@@ -101,7 +101,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/chanto-shinakya.html
 SNSに疲れたら、そっとアプリを閉じていい。
 ミュートも通知オフも、逃げじゃなくて心の手入れ。
 
-https://tenseitomato28-lgtm.github.io/-/posts/sns-tsukare.html
+https://murinaku-blog.pages.dev/posts/sns-tsukare.html
 
 #SNS疲れ #エッセイ
 ```
@@ -117,7 +117,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/sns-tsukare.html
 戻ったら通知は3件。どれも急ぎじゃなかった。
 あんなに恐れてた「見逃し」って、ほぼ幻だった。
 
-https://tenseitomato28-lgtm.github.io/-/posts/phone-free.html
+https://murinaku-blog.pages.dev/posts/phone-free.html
 
 #デジタルデトックス
 ```
@@ -128,7 +128,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/phone-free.html
 
 300円の儀式で、一週間はちゃんと報われる。
 
-https://tenseitomato28-lgtm.github.io/-/posts/konbini-friday.html
+https://murinaku-blog.pages.dev/posts/konbini-friday.html
 
 #コンビニスイーツ #エッセイ
 ```
@@ -139,7 +139,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/konbini-friday.html
 
 ごはんと味噌汁だけでいい。30点の自炊を細く長く。
 
-https://tenseitomato28-lgtm.github.io/-/posts/hitorigurashi-jisui.html
+https://murinaku-blog.pages.dev/posts/hitorigurashi-jisui.html
 
 #一人暮らし #自炊
 ```
@@ -150,7 +150,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/hitorigurashi-jisui.html
 
 推しに使う時間もお金も、浪費じゃなくて、平日に灯りをともす生活費だと思う。
 
-https://tenseitomato28-lgtm.github.io/-/posts/oshi-katsu.html
+https://murinaku-blog.pages.dev/posts/oshi-katsu.html
 
 #推し活
 ```
@@ -161,7 +161,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/oshi-katsu.html
 
 年6万円。旅行に行ける。
 
-https://tenseitomato28-lgtm.github.io/-/posts/subsc-minaoshi.html
+https://murinaku-blog.pages.dev/posts/subsc-minaoshi.html
 
 #節約 #サブスク
 ```
@@ -173,7 +173,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/subsc-minaoshi.html
 続いたのは「15分だけ早く起きて、何もしない」。
 失敗のない習慣は、やめる理由がない。
 
-https://tenseitomato28-lgtm.github.io/-/posts/asa-katsu.html
+https://murinaku-blog.pages.dev/posts/asa-katsu.html
 
 #朝活
 ```
@@ -184,7 +184,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/asa-katsu.html
 
 週末に頭の中を白紙に戻しに行く。月曜の自分への仕送り。
 
-https://tenseitomato28-lgtm.github.io/-/posts/sauna.html
+https://murinaku-blog.pages.dev/posts/sauna.html
 
 #サウナ #ととのう
 ```
@@ -195,7 +195,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/sauna.html
 
 あの現象、ちゃんと理由がありました。
 
-https://tenseitomato28-lgtm.github.io/-/posts/cafe-sagyou.html
+https://murinaku-blog.pages.dev/posts/cafe-sagyou.html
 
 #カフェ #作業
 ```
@@ -207,7 +207,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/cafe-sagyou.html
 わかったのは、欲しくて買ってたのか、暇だから買ってたのか。
 月イチで財布に休日をあげてみる。
 
-https://tenseitomato28-lgtm.github.io/-/posts/nani-mo-kawanai.html
+https://murinaku-blog.pages.dev/posts/nani-mo-kawanai.html
 
 #ミニマリスト
 ```
@@ -218,7 +218,7 @@ https://tenseitomato28-lgtm.github.io/-/posts/nani-mo-kawanai.html
 
 用事のない「無駄」な時間が、一日をやわらかく閉じてくれる。
 
-https://tenseitomato28-lgtm.github.io/-/posts/evening-walk.html
+https://murinaku-blog.pages.dev/posts/evening-walk.html
 
 #散歩 #エッセイ
 ```

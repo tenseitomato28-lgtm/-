@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tenseitomato28-lgtm.github.io/-/sitemap.xml
+Sitemap: https://murinaku-blog.pages.dev/sitemap.xml
