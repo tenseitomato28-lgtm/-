@@ -120,7 +120,10 @@ const smEntry = `  <url>
 sm = sm.replace(/(<urlset[^>]*>\n)/, `$1${smEntry}`);
 fs.writeFileSync(smPath, sm);
 
-/* ---- 4) feed.xml の先頭に追加（dlvr.it がこれを拾ってXに自動投稿） ---- */
+/* ---- 4) feed.xml の先頭に追加（dlvr.it がこれを拾ってXに自動投稿） ----
+   <description> は dlvr.it の投稿テンプレートで {description} として使える。
+   queue の JSON に "tweet" を書いておくと、その記事だけX用の文面を差し替えられる。
+   書かなければ従来どおり desc（=meta description）がそのまま入る。          */
 function rfc822(d) {
   const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   const mons = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -133,7 +136,7 @@ const item = `    <item>
       <title>${esc(p.title)}</title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
-      <description>${esc(p.desc)}</description>
+      <description>${esc(p.tweet || p.desc)}</description>
       <pubDate>${rfc822(new Date())}</pubDate>
     </item>
 `;
