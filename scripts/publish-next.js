@@ -50,8 +50,8 @@ const post = `<!DOCTYPE html>
 <meta name="twitter:title" content="${p.title}">
 <meta name="twitter:description" content="${p.desc}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%94%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="/-/assets/post.css">
-<link rel="stylesheet" href="/-/assets/monetize.css">
+<link rel="stylesheet" href="/assets/post.css">
+<link rel="stylesheet" href="/assets/monetize.css">
 </head>
 <body>
 <button class="theme-toggle" id="toggle" aria-label="テーマ切り替え">☽</button>
@@ -84,9 +84,9 @@ ${bodyHtml}
     affiliate: ${aff}
   };
 </script>
-<script src="/-/assets/config.js"></script>
-<script src="/-/assets/theme.js"></script>
-<script src="/-/assets/monetize.js"></script>
+<script src="/assets/config.js"></script>
+<script src="/assets/theme.js"></script>
+<script src="/assets/monetize.js"></script>
 </body>
 </html>
 `;
