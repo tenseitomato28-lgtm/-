@@ -87,7 +87,7 @@ ${titles.map(t => "- " + t).join("\n")}
   "affiliate": [
     { "name": "本文の内容に自然に関連する商品名", "desc": "ひとこと説明", "url": "https://www.amazon.co.jp/s?k=検索キーワード" }
   ],
-  "body": ["段落1", "段落2", "…", "段落9〜12"]
+  "body": ["段落1", "段落2", "…", "段落10〜16（合計2800〜3500字）"]
 }`;
 }
 
@@ -101,7 +101,7 @@ async function callClaude(prompt) {
     },
     body: JSON.stringify({
       model: "claude-sonnet-5",
-      max_tokens: 6000,
+      max_tokens: 8000,
       messages: [{ role: "user", content: prompt }],
     }),
   });
