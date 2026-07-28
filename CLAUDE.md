@@ -29,7 +29,10 @@
 
 ## 自動化の仕組み
 1. **毎日18:02 JST**: GitHub Actions (`.github/workflows/daily-post.yml`) が `scripts/publish-next.js` を実行し、`queue/` の先頭記事を1本公開（記事HTML生成・index/sitemap/feed更新・自動コミット）
-2. **X自動投稿**: dlvr.it が `feed.xml` を監視し、新記事をXに投稿（ユーザーのXアカウントに接続済み）
+2. **X自動投稿**: dlvr.it が `feed.xml` を監視し、新記事をXに投稿する構成。**ただし2026/7/28時点で停止中**
+   - **停止の原因（7/28判明）**: dlvr.it のルートが旧GitHub Pages の feed URL（`tenseitomato28-lgtm.github.io/-/feed.xml`）を見たままで、7/22のCloudflare Pages移行でその URL が404になり配信が止まった。**復旧にはdlvr.it管理画面でフィードURLを `https://murinaku-blog.pages.dev/feed.xml` に差し替える必要がある**（ユーザーの手作業。Claudeからdlvr.itには到達できない）
+   - **7/22〜7/28に公開した6本はXに自動投稿されていない**。必要なら手動投稿する
+   - **教訓**: 公開ドメインを変えたら dlvr.it 側のフィードURLも必ず更新する。dlvr.it は管理画面がClaudeから見えないため、止まっても気づけない。**「接続済み」と書かれていても、実機で確認が取れるまで動作を前提にしない**
    - **投稿文の指定**: queue の JSON に任意フィールド `"tweet"` を書くと、その文面が feed の `<description>` に入る（書かなければ従来どおり `desc` が入る）。dlvr.it 側で投稿テンプレートを `{description} {link}` にしておけば、記事ごとにX投稿文を自分で書ける。`desc` は meta description 用のままなので、SEO文とツイート文を分けられる
 3. **ストック補充**: SessionStart フックが `queue/*.json` を数え、5本未満なら補充指示を注入 → 既存の queue/*.json と同形式で新エッセイを書き、コミット・プッシュする
 4. **週次見直し**: SessionStart フックが `.claude/last-review`（epoch秒）を確認し、7日超なら見直し指示を注入
