@@ -32,4 +32,13 @@ window.SITE = {
     client: "",                   // ← 例: "ca-pub-1234567890123456"
     slot:   "",                   // ← 広告ユニットのスロットID
   },
+
+  /* ---- ④ Kindle本の紹介（全記事の下にカードを表示） ----
+     url を空 ("") にすると非表示。amazonTag が自動で付きます。          */
+  kindle: {
+    url:   "https://www.amazon.co.jp/dp/B0H7T45HZT",
+    title: "無理なく: がんばりすぎないための１８のエッセイ",
+    note:  "このブログのエッセイ18篇を、1冊の本にまとめました。Kindle Unlimitedなら追加料金なしで読めます。",
+    label: "📖 Kindleで読む（¥399）",
+  },
 };
