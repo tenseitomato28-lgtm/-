@@ -29,3 +29,14 @@ jobs:
             git commit -m "Publish scheduled post"
             git push
           fi
+      # 新しい記事をBingなど(IndexNow対応の検索エンジン)に通知する。
+      # キーファイル: /3e47e2b800b74da3ad52792c889a9e1a.txt
+      - name: Notify IndexNow
+        run: |
+          NEW=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- posts/ 2>/dev/null | head -1 || true)
+          if [ -z "$NEW" ]; then echo "no new post"; exit 0; fi
+          URL="https://murinaku-blog.pages.dev/$NEW"
+          sleep 120
+          curl -s -o /dev/null -w "IndexNow HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"murinaku-blog.pages.dev\",\"key\":\"3e47e2b800b74da3ad52792c889a9e1a\",\"urlList\":[\"$URL\",\"https://murinaku-blog.pages.dev/\"]}" || true
