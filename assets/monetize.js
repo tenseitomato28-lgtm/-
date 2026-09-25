@@ -55,6 +55,20 @@
     html += "</div>";
   }
 
+  /* --- ②' Kindle本の紹介 --- */
+  if (SITE.kindle && SITE.kindle.url) {
+    var kl = SITE.kindle.url;
+    if (SITE.amazonTag) kl += (kl.indexOf("?") > -1 ? "&" : "?") + "tag=" + SITE.amazonTag;
+    html += '<div class="mz-support mz-kindle">';
+    if (SITE.kindle.title) html += '<p class="mz-support-note"><strong>' + SITE.kindle.title + "</strong></p>";
+    if (SITE.kindle.note) html += '<p class="mz-support-note">' + SITE.kindle.note + "</p>";
+    html +=
+      '<a class="mz-support-btn" target="_blank" rel="noopener sponsored" href="' +
+      kl + '">' + (SITE.kindle.label || "Kindleで読む") + "</a>";
+    html += '<span class="mz-pr">※ Amazonアソシエイトリンクを含みます</span>';
+    html += "</div>";
+  }
+
   /* --- ③ アフィリエイト（記事ごとのおすすめ品） --- */
   if (PAGE.affiliate && PAGE.affiliate.length) {
     html += '<div class="mz-aff"><span class="mz-label">この記事に登場したもの</span><div class="mz-aff-grid">';
