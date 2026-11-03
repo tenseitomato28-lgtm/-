@@ -1,9 +1,8 @@
 name: refill-queue
 
+# 2026-11-03: ANTHROPIC_API_KEY が無効（401）になったため、定期の補充は止めた。
+# 補充はクラウドの自動実行（routine「ブログ運転C」）が毎日 queue を見て書く。手動の実行だけ残す。
 on:
-  schedule:
-    # 火・金 07:03 JST = 月・木 22:03 UTC
-    - cron: "3 22 * * 1,4"
   workflow_dispatch:
     inputs:
       force:
