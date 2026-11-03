@@ -147,8 +147,7 @@ if (MODE === "--add") {
     process.exit(1);
   }
   const fname = `${datePrefix}-${p.slug}.json`;
-  fs.writeFileSync(path.join(QDIR, fname), JSON.stringify(p, null, 2) + "
-");
+  fs.writeFileSync(path.join(QDIR, fname), JSON.stringify(p, null, 2) + "\n");
   console.log(`queued: ${p.title} -> queue/${fname}`);
   process.exit(0);
 }
