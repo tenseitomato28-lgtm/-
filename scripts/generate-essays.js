@@ -2,6 +2,10 @@
    generate-essays.js — queue/ が5本未満のとき、Claude APIでエッセイを
    自動生成して補充する。GitHub Actions (refill-queue.yml) から実行される。
    環境変数: ANTHROPIC_API_KEY (必須) / FORCE=1 (満杯でも1本生成・テスト用)
+   クラウドの自動実行（Claude Code の routine）が自分で書くときは APIキー不要（2026-11-03 追加）:
+     node scripts/generate-essays.js --count        … queue の本数
+     node scripts/generate-essays.js --prompt       … 書くときの指示（既存タイトルつき）
+     node scripts/generate-essays.js --add 下書き.json … 形を確かめて queue/ に入れる
    ========================================================================= */
 const fs = require("fs");
 const path = require("path");
@@ -12,14 +16,20 @@ const TARGET = 5;
 const KEY = process.env.ANTHROPIC_API_KEY;
 const FORCE = !!process.env.FORCE;
 
+const MODE = process.argv[2] || "";
+fs.mkdirSync(QDIR, { recursive: true }); // queue/ が空になると git から消えるため
 const queueFiles = fs.readdirSync(QDIR).filter(f => f.endsWith(".json"));
+if (MODE === "--count") {
+  console.log(queueFiles.length);
+  process.exit(0);
+}
 let need = TARGET - queueFiles.length;
 if (FORCE && need < 1) need = 1;
-if (need < 1) {
+if (!MODE && need < 1) {
   console.log(`queue has ${queueFiles.length} items — no refill needed`);
   process.exit(0);
 }
-if (!KEY) {
+if (!MODE && !KEY) {
   console.error("ANTHROPIC_API_KEY is not set");
   process.exit(1);
 }
@@ -119,8 +129,28 @@ function validate(p) {
   if (!p.desc || !p.excerpt) return "missing desc/excerpt";
   if (!Array.isArray(p.body) || p.body.length < 9 || p.body.length > 18) return "bad body";
   if (p.body.some(t => typeof t !== "string" || t.length < 40)) return "body paragraph too short";
+  const total = p.body.join("").length;
+  if (total < 2400 || total > 4200) return `body length ${total} (2800〜3500字が目安)`;
   if (!Array.isArray(p.affiliate)) p.affiliate = [];
   return null;
+}
+
+if (MODE === "--prompt") {
+  console.log(buildPrompt());
+  process.exit(0);
+}
+if (MODE === "--add") {
+  const p = JSON.parse(fs.readFileSync(process.argv[3], "utf8"));
+  const err = validate(p);
+  if (err) {
+    console.error("NG: " + err);
+    process.exit(1);
+  }
+  const fname = `${datePrefix}-${p.slug}.json`;
+  fs.writeFileSync(path.join(QDIR, fname), JSON.stringify(p, null, 2) + "
+");
+  console.log(`queued: ${p.title} -> queue/${fname}`);
+  process.exit(0);
 }
 
 (async () => {
